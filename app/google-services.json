@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "935132577576",
+    "firebase_url": "https://gophr-c8962.firebaseio.com",
+    "project_id": "gophr-c8962",
+    "storage_bucket": "gophr-c8962.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935132577576:android:2c0f28a6d2549fe8",
+        "android_client_info": {
+          "package_name": "com.example.khalilvanalphen.gophr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935132577576-fvln8oo6houo4ttkbduste3d2quh1otg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.khalilvanalphen.gophr",
+            "certificate_hash": "72F77281CA4B723CC34DD40A60C4786BA83C75CC"
+          }
+        },
+        {
+          "client_id": "935132577576-95ra0j7qrejqv2ivtsppqvqrf7aqbrub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlzjRWMF_mpLY9d5JEC5eM9Y2i-AVJlpM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935132577576-95ra0j7qrejqv2ivtsppqvqrf7aqbrub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
