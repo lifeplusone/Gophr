@@ -16,7 +16,7 @@ import com.firebase.client.FirebaseError;
 
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity {
+public class BrowseActivity extends AppCompatActivity {
 
     Button btnDebug;
     ListView listView;
