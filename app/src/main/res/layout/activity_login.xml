@@ -16,9 +16,11 @@
         android:layout_height="fill_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
+        android:padding="@dimen/activity_horizontal_margin"
+        android:clickable="true"
+        android:focusableInTouchMode="true">
 
-        <android.support.design.widget.TextInputLayout
+    <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
