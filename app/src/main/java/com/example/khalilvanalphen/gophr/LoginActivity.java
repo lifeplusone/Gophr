@@ -11,7 +11,6 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
-    private LinearLayout background;
 
 
     public void hideKeyboard(View view) {
@@ -38,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //We do this to keep the keyboard suppressed
         getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN
         );
@@ -120,12 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // signed in user can be handled in the listener.
                                 progressBar.setVisibility(View.GONE);
                                 if (!task.isSuccessful()) {
-                                    // there was an error
-                                    if (password.length() < 6) {
-                                        inputPassword.setError("password too short");
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "auth failed", Toast.LENGTH_LONG).show();
-                                    }
+                                    Toast.makeText(LoginActivity.this, "auth failed", Toast.LENGTH_LONG).show();
                                 } else {
                                     Intent intent = new Intent(LoginActivity.this, BrowseActivity.class);
                                     startActivity(intent);

@@ -12,7 +12,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Random data"
+        android:text="New Task"
         android:id="@+id/btn_debug"/>
     <ListView
         android:layout_width="wrap_content"

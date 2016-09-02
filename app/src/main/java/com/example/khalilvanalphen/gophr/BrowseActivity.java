@@ -1,5 +1,6 @@
 package com.example.khalilvanalphen.gophr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,18 +9,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-import java.util.Random;
-
 public class BrowseActivity extends AppCompatActivity {
 
     Button btnDebug;
     ListView listView;
+
+
 
     Firebase mRef;
 
@@ -38,9 +40,9 @@ public class BrowseActivity extends AppCompatActivity {
 
         btnDebug.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Random r = new Random();
-                String item = "datapoint" + r.nextInt(100);
-                mRef.push().setValue(item);
+                Intent i = new Intent(getApplicationContext(), TaskCreationActivity.class);
+                startActivityForResult(i, 1);
+                mRef.push().setValue(null);
             }
         });
 
@@ -61,7 +63,7 @@ public class BrowseActivity extends AppCompatActivity {
         mRef.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        adapter.add((String) dataSnapshot.getValue());
+                        adapter.add(dataSnapshot.getValue(GphTask.class).name);
                     }
 
                     @Override
@@ -71,7 +73,7 @@ public class BrowseActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        adapter.remove((String) dataSnapshot.getValue());
+                        adapter.add(dataSnapshot.getValue(GphTask.class).name);
                     }
 
                     @Override
@@ -84,5 +86,22 @@ public class BrowseActivity extends AppCompatActivity {
 
                     }
                 });
+
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch(requestCode) {
+            case (1) : {
+                if (resultCode == Activity.RESULT_OK) {
+                    GphTask task = data.getParcelableExtra("task");
+                    Toast.makeText(getApplicationContext(), task.name, Toast.LENGTH_SHORT).show();
+                    mRef.push().setValue(task.name);
+                }
+                break;
+            }
+        }
     }
 }
