@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,6 +14,9 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.android.gms.tasks.Task;
+
+import java.util.ArrayList;
 
 public class BrowseActivity extends AppCompatActivity {
 
@@ -46,15 +48,17 @@ public class BrowseActivity extends AppCompatActivity {
             }
         });
 
+        ArrayList<GphTask> data = new ArrayList<GphTask>();
+
         listView = (ListView) findViewById(R.id.list_view);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, android.R.id.text1);
+        final GphTaskAdapter adapter = new GphTaskAdapter(this, R.layout.task_list_row_item, data);
         listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), ItemViewActivity.class);
-                i.putExtra("title", (String) listView.getItemAtPosition(position));
+                i.putExtra("task", (GphTask) listView.getItemAtPosition(position));
                 startActivity(i);
             }
         });
@@ -63,7 +67,7 @@ public class BrowseActivity extends AppCompatActivity {
         mRef.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        adapter.add(dataSnapshot.getValue(GphTask.class).name);
+                        adapter.add(dataSnapshot.getValue(GphTask.class));
                     }
 
                     @Override
@@ -73,7 +77,7 @@ public class BrowseActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        adapter.add(dataSnapshot.getValue(GphTask.class).name);
+                        adapter.add(dataSnapshot.getValue(GphTask.class));
                     }
 
                     @Override

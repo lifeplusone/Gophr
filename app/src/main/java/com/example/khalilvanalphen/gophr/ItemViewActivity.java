@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 public class ItemViewActivity extends AppCompatActivity {
 
+    GphTask task;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +17,9 @@ public class ItemViewActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        ((TextView) findViewById(R.id.text_title)).setText(getIntent().getStringExtra("title"));
+
+        task = getIntent().getParcelableExtra("task");
+
+        ((TextView) findViewById(R.id.text_title)).setText(task.name);
     }
 }
