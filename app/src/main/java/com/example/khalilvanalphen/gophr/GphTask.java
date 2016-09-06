@@ -3,6 +3,8 @@ package com.example.khalilvanalphen.gophr;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.android.gms.maps.model.LatLng;
+
 /**
  * Created by khalilvanalphen on 2016-09-02.
  */
@@ -16,16 +18,59 @@ public class GphTask implements Parcelable{
 
 
     private String title;
+    private String description;
+    private int day;
+    private int month;
+    private int hour;
+    private int minute;
+    private LatLng location;
 
-    public GphTask (String title){
+    public void setTitle(String title) {
         this.title = title;
+    }
+    public String getTitle(){
+        return title;
+    }
+
+    public void setLocation(LatLng location) {
+        this.location = location;
+    }
+    public LatLng getLocation(){
+        return location;
+    }
+
+    public void setTime(int month, int day, int hour, int minute) {
+        this.month = month;
+        this.day = day;
+        this.hour = hour;
+        this.minute = minute;
+    }
+    public long getMonth(){
+        return month;
+    }
+    public long getDay(){
+        return day;
+    }
+    public long getHour(){
+        return hour;
+    }
+    public long getMinute(){
+        return minute;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public GphTask(){
 
     }
 
-    public String getTitle(){return title;}
+
 
 
     @Override
@@ -36,6 +81,12 @@ public class GphTask implements Parcelable{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
+        parcel.writeString(description);
+        parcel.writeInt(month);
+        parcel.writeInt(day);
+        parcel.writeInt(hour);
+        parcel.writeInt(minute);
+        parcel.writeParcelable(location, 0);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -49,8 +100,13 @@ public class GphTask implements Parcelable{
         }
     };
 
-    // example constructor that takes a Parcel and gives you an object populated with it's values
     private GphTask(Parcel in) {
         title = in.readString();
+        description = in.readString();
+        month = in.readInt();
+        day = in.readInt();
+        hour = in.readInt();
+        minute = in.readInt();
+        location = in.readParcelable(LatLng.class.getClassLoader());
     }
 }

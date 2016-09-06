@@ -1,22 +1,28 @@
 package com.example.khalilvanalphen.gophr;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
+import java.util.Calendar;
+
 
 public class TaskCreationActivity extends AppCompatActivity {
 
     Button btnCreate, btnPickPlace;
-    EditText nameField;
+    EditText nameField, descField;
+    TimePicker timePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +32,20 @@ public class TaskCreationActivity extends AppCompatActivity {
         btnCreate = (Button) findViewById(R.id.tc_create);
         btnPickPlace = (Button) findViewById(R.id.tc_pick_place);
         nameField = (EditText) findViewById(R.id.tc_name);
+        descField = (EditText) findViewById(R.id.tc_desc);
+        timePicker = (TimePicker) findViewById(R.id.tc_time);
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.M)
             public void onClick(View v) {
+
+                GphTask newTask = new GphTask();
+                newTask.setTitle(nameField.getText().toString());
+                newTask.setDescription(descField.getText().toString());
+                newTask.setTime(Calendar.MONTH, Calendar.DAY_OF_MONTH, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+
                 Intent resultIntent = new Intent();
-                resultIntent.putExtra("task", new GphTask(nameField.getText().toString()));
+                resultIntent.putExtra("task", newTask);
                 setResult(Activity.RESULT_OK, resultIntent);
                 finish();
             }

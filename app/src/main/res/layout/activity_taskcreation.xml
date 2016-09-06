@@ -20,14 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="title"
-        android:id="@+id/editText"
+        android:hint="desc"
+        android:id="@+id/tc_desc"
         android:layout_weight="1" />
 
     <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
+        android:id="@+id/tc_time"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1" />
 

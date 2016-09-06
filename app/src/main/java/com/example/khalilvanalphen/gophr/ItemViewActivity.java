@@ -21,5 +21,11 @@ public class ItemViewActivity extends AppCompatActivity {
         task = getIntent().getParcelableExtra("task");
 
         ((TextView) findViewById(R.id.text_title)).setText(task.getTitle());
+        ((TextView) findViewById(R.id.text_desc)).setText(task.getDescription());
+
+        String time = task.getMonth() + "/" + task.getDay() + "  " + task.getHour() + ":" + task.getMinute();
+
+        ((TextView) findViewById(R.id.text_time)).setText(String.valueOf(time));
+        if (task.getLocation() != null) ((TextView) findViewById(R.id.text_location)).setText(task.getLocation().toString());
     }
 }
