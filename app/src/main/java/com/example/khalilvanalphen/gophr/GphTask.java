@@ -7,15 +7,26 @@ import android.os.Parcelable;
  * Created by khalilvanalphen on 2016-09-02.
  */
 public class GphTask implements Parcelable{
-    String name;
 
-    public GphTask (String name){
-        this.name = name;
+    /**
+     * GOPHR TASKS
+     */
+
+
+
+
+    private String title;
+
+    public GphTask (String title){
+        this.title = title;
     }
 
     public GphTask(){
 
     }
+
+    public String getTitle(){return title;}
+
 
     @Override
     public int describeContents() {
@@ -24,7 +35,7 @@ public class GphTask implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(name);
+        parcel.writeString(title);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -40,6 +51,6 @@ public class GphTask implements Parcelable{
 
     // example constructor that takes a Parcel and gives you an object populated with it's values
     private GphTask(Parcel in) {
-        name = in.readString();
+        title = in.readString();
     }
 }

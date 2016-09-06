@@ -46,7 +46,7 @@ public class GphTaskAdapter extends ArrayAdapter<GphTask> {
         }
 
         GphTask task = data.get(position);
-        holder.txtTitle.setText(task.name);
+        holder.txtTitle.setText(task.getTitle());
 
         return row;
     }

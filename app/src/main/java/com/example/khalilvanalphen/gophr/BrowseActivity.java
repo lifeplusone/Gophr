@@ -14,7 +14,6 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
 
@@ -32,7 +31,7 @@ public class BrowseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
-        mRef = new Firebase("https://gophr-c8962.firebaseio.com/Items");
+        mRef = new Firebase("https://gophr-c8962.firebaseio.com/Tasks");
     }
 
     @Override
@@ -101,8 +100,8 @@ public class BrowseActivity extends AppCompatActivity {
             case (1) : {
                 if (resultCode == Activity.RESULT_OK) {
                     GphTask task = data.getParcelableExtra("task");
-                    Toast.makeText(getApplicationContext(), task.name, Toast.LENGTH_SHORT).show();
-                    mRef.push().setValue(task.name);
+                    Toast.makeText(getApplicationContext(), task.getTitle(), Toast.LENGTH_SHORT).show();
+                    mRef.push().setValue(task.getTitle());
                 }
                 break;
             }

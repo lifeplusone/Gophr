@@ -20,6 +20,6 @@ public class ItemViewActivity extends AppCompatActivity {
 
         task = getIntent().getParcelableExtra("task");
 
-        ((TextView) findViewById(R.id.text_title)).setText(task.name);
+        ((TextView) findViewById(R.id.text_title)).setText(task.getTitle());
     }
 }
