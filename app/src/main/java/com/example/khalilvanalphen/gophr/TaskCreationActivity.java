@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.maps.model.LatLng;
@@ -17,7 +18,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.Calendar;
 
 
-public class TaskCreationActivity extends AppCompatActivity {
+public class TaskCreationActivity extends AppCompatActivity{
 
     Button btnCreate, btnPickPlace;
     EditText nameField, descField;
@@ -42,6 +43,7 @@ public class TaskCreationActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (location == null){
+                    Toast.makeText(TaskCreationActivity.this, "Please select a location", Toast.LENGTH_LONG).show();
                     return;
                 }
 
