@@ -4,14 +4,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public class ItemViewActivity extends AppCompatActivity {
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
-    GphTask task;
+public class ItemViewActivity extends AppCompatActivity implements OnMapReadyCallback {
+
+    private GphTask task;
+    private GoogleMap mMap;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_view);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -27,5 +38,13 @@ public class ItemViewActivity extends AppCompatActivity {
 
         ((TextView) findViewById(R.id.text_time)).setText(String.valueOf(time));
         ((TextView) findViewById(R.id.text_location)).setText(task.getLat() + " | " + task.getLng());
+    }
+
+    @Override
+    public void onMapReady(GoogleMap mMap) {
+
+        LatLng location = new LatLng(task.getLat(), task.getLng());
+        mMap.addMarker(new MarkerOptions().position(location).title("Gophr Task"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
 }
