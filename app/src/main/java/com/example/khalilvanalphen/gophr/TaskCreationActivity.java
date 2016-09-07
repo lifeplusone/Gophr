@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
 
+import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 import java.util.Calendar;
@@ -44,10 +45,19 @@ public class TaskCreationActivity extends AppCompatActivity{
         timeList = (ListView) findViewById(R.id.tc_time_list);
         placeList = (ListView) findViewById(R.id.tc_place_list);
 
-        timeListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, newTask.getTimes());
+        timeListAdapter = new TimeAdapter(this, R.layout.time_list_row, newTask.getTimes());
         timeList.setAdapter(timeListAdapter);
-        placeListAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, newTask.getLocations());
+        placeListAdapter = new PlaceAdapter(this, R.layout.location_list_row, newTask.getLocations());
         placeList.setAdapter(placeListAdapter);
+
+        nameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    ViewUtilities.hideKeyboard(TaskCreationActivity.this, v);
+                }
+            }
+        });
 
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -107,9 +117,13 @@ public class TaskCreationActivity extends AppCompatActivity{
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
 
+                Place place = PlacePicker.getPlace(TaskCreationActivity.this, data);
+
                 Location newl = new Location();
-                newl.setLat(PlacePicker.getPlace(TaskCreationActivity.this, data).getLatLng().latitude);
-                newl.setLng(PlacePicker.getPlace(TaskCreationActivity.this, data).getLatLng().longitude);
+                newl.setLat(place.getLatLng().latitude);
+                newl.setLng(place.getLatLng().longitude);
+                newl.setName(place.getName().toString());
+                newl.setId(place.getId());
                 newl.setTag("New Loc");
                 newTask.addLocation(newl);
 

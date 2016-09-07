@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".TaskCreationActivity">
+    tools:context=".TaskCreationActivity"
+    android:id="@+id/tc_background"
+    android:clickable="true">
 
     <EditText
         android:layout_width="match_parent"

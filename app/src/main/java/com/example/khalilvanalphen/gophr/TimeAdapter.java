@@ -11,13 +11,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class GphTaskAdapter extends ArrayAdapter<GphTask> {
+public class TimeAdapter extends ArrayAdapter<Time> {
 
     Context context;
     int layoutResourceId;
-    ArrayList<GphTask> data;
+    ArrayList<Time> data;
 
-    public GphTaskAdapter(Context context, int layoutResourceId, ArrayList<GphTask> data) {
+    public TimeAdapter(Context context, int layoutResourceId, ArrayList<Time> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -27,14 +27,14 @@ public class GphTaskAdapter extends ArrayAdapter<GphTask> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
-        TaskHolder holder = null;
+        Holder holder = null;
 
         if(row == null)
         {
             LayoutInflater inflater = ((Activity)context).getLayoutInflater();
             row = inflater.inflate(layoutResourceId, parent, false);
 
-            holder = new TaskHolder();
+            holder = new Holder();
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
 
@@ -42,18 +42,17 @@ public class GphTaskAdapter extends ArrayAdapter<GphTask> {
         }
         else
         {
-            holder = (TaskHolder)row.getTag();
+            holder = (Holder)row.getTag();
         }
 
-        GphTask task = data.get(position);
-        if(task != null) {
-            holder.txtTitle.setText(task.getTitle());
+        Time time = data.get(position);
+        if(time != null) {
+            holder.txtTitle.setText(time.toString());
         }
 
         return row;
     }
-
-    static class TaskHolder {
+    static class Holder {
         ImageView imgIcon;
         TextView txtTitle;
     }
