@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="title"
+        android:hint="add a title"
         android:id="@+id/tc_name"
         android:layout_weight="1" />
 
@@ -20,28 +20,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="desc"
+        android:hint="add a description"
         android:id="@+id/tc_desc"
         android:layout_weight="1" />
-
-    <TimePicker
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tc_time"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="1" />
-
     <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add a time"
+        android:id="@+id/tc_pick_time"
+        android:layout_weight="1" />
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choose Location"
+        android:id="@+id/tc_time_list" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="add a location"
         android:id="@+id/tc_pick_place"
         android:layout_weight="1" />
-
-    <Button
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create"
+        android:id="@+id/tc_place_list" />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="create"
         android:id="@+id/tc_create"
         android:layout_weight="1" />
 

@@ -3,6 +3,8 @@ package com.example.khalilvanalphen.gophr;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by khalilvanalphen on 2016-09-02.
  */
@@ -17,12 +19,8 @@ public class GphTask implements Parcelable{
 
     private String title;
     private String description;
-    private int day;
-    private int month;
-    private int hour;
-    private int minute;
-    private double lat;
-    private double lng;
+    private ArrayList<Location> locations = new ArrayList<>();
+    private ArrayList<Time> times = new ArrayList<>();
 
     public void setTitle(String title) {
         this.title = title;
@@ -31,34 +29,19 @@ public class GphTask implements Parcelable{
         return title;
     }
 
-    public void setLocation(double lat, double lng) {
-        this.lat = lat;
-        this.lat = lng;
-    }
-    public double getLat(){
-        return lat;
-    }
-    public double getLng(){
-        return lng;
+    public void addLocation(Location l) {
+        locations.add(l);
     }
 
-    public void setTime(int month, int day, int hour, int minute) {
-        this.month = month;
-        this.day = day;
-        this.hour = hour;
-        this.minute = minute;
+    public ArrayList<Location> getLocations(){
+        return locations;
     }
-    public long getMonth(){
-        return month;
+
+    public ArrayList<Time> getTimes(){
+        return times;
     }
-    public long getDay(){
-        return day;
-    }
-    public long getHour(){
-        return hour;
-    }
-    public long getMinute(){
-        return minute;
+    public void addTime(Time t) {
+        times.add(t);
     }
 
     public String getDescription() {
@@ -85,12 +68,8 @@ public class GphTask implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(description);
-        parcel.writeInt(month);
-        parcel.writeInt(day);
-        parcel.writeInt(hour);
-        parcel.writeInt(minute);
-        parcel.writeDouble(lat);
-        parcel.writeDouble(lng);
+        parcel.writeSerializable(times);
+        parcel.writeSerializable(locations);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -107,11 +86,7 @@ public class GphTask implements Parcelable{
     private GphTask(Parcel in) {
         title = in.readString();
         description = in.readString();
-        month = in.readInt();
-        day = in.readInt();
-        hour = in.readInt();
-        minute = in.readInt();
-        lat = in.readDouble();
-        lng = in.readDouble();
+        times = (ArrayList<Time>) in.readSerializable();
+        locations = (ArrayList<Location>) in.readSerializable();
     }
 }

@@ -34,16 +34,12 @@ public class ItemViewActivity extends AppCompatActivity implements OnMapReadyCal
         ((TextView) findViewById(R.id.text_title)).setText(task.getTitle());
         ((TextView) findViewById(R.id.text_desc)).setText(task.getDescription());
 
-        String time = task.getMonth() + "/" + task.getDay() + "  " + task.getHour() + ":" + task.getMinute();
-
-        ((TextView) findViewById(R.id.text_time)).setText(String.valueOf(time));
-        ((TextView) findViewById(R.id.text_location)).setText(task.getLat() + " | " + task.getLng());
     }
 
     @Override
     public void onMapReady(GoogleMap mMap) {
 
-        LatLng location = new LatLng(task.getLat(), task.getLng());
+        LatLng location = new LatLng(0, 0);
         mMap.addMarker(new MarkerOptions().position(location).title("Gophr Task"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(location));
     }
