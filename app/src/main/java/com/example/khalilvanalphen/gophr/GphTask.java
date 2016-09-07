@@ -3,8 +3,6 @@ package com.example.khalilvanalphen.gophr;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.google.android.gms.maps.model.LatLng;
-
 /**
  * Created by khalilvanalphen on 2016-09-02.
  */
@@ -23,7 +21,8 @@ public class GphTask implements Parcelable{
     private int month;
     private int hour;
     private int minute;
-    private LatLng location;
+    private double lat;
+    private double lng;
 
     public void setTitle(String title) {
         this.title = title;
@@ -32,11 +31,15 @@ public class GphTask implements Parcelable{
         return title;
     }
 
-    public void setLocation(LatLng location) {
-        this.location = location;
+    public void setLocation(double lat, double lng) {
+        this.lat = lat;
+        this.lat = lng;
     }
-    public LatLng getLocation(){
-        return location;
+    public double getLat(){
+        return lat;
+    }
+    public double getLng(){
+        return lng;
     }
 
     public void setTime(int month, int day, int hour, int minute) {
@@ -86,7 +89,8 @@ public class GphTask implements Parcelable{
         parcel.writeInt(day);
         parcel.writeInt(hour);
         parcel.writeInt(minute);
-        parcel.writeParcelable(location, 0);
+        parcel.writeDouble(lat);
+        parcel.writeDouble(lng);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -107,6 +111,7 @@ public class GphTask implements Parcelable{
         day = in.readInt();
         hour = in.readInt();
         minute = in.readInt();
-        location = in.readParcelable(LatLng.class.getClassLoader());
+        lat = in.readDouble();
+        lng = in.readDouble();
     }
 }

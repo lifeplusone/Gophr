@@ -10,10 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.Calendar;
 
@@ -24,8 +23,11 @@ public class TaskCreationActivity extends AppCompatActivity {
     EditText nameField, descField;
     TimePicker timePicker;
 
+    LatLng location = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taskcreation);
 
@@ -39,10 +41,15 @@ public class TaskCreationActivity extends AppCompatActivity {
             @TargetApi(Build.VERSION_CODES.M)
             public void onClick(View v) {
 
+                if (location == null){
+                    return;
+                }
+
                 GphTask newTask = new GphTask();
                 newTask.setTitle(nameField.getText().toString());
                 newTask.setDescription(descField.getText().toString());
                 newTask.setTime(Calendar.MONTH, Calendar.DAY_OF_MONTH, timePicker.getCurrentHour(), timePicker.getCurrentMinute());
+                newTask.setLocation(location.latitude, location.longitude);
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("task", newTask);
@@ -76,8 +83,9 @@ public class TaskCreationActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-                Place selectedPlace = PlacePicker.getPlace(this, data);
-                Toast.makeText(getApplicationContext(), selectedPlace.getAddress(), Toast.LENGTH_SHORT).show();
+
+                location = PlacePicker.getLatLngBounds(data).getCenter();
+
             }
         }
     }
