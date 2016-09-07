@@ -92,7 +92,7 @@ public class TaskCreationActivity extends AppCompatActivity{
                         newT.setMinute(selectedMinute);
                         newTask.addTime(newT);
 
-                        timeListAdapter.add(newT);
+                        timeListAdapter.notifyDataSetChanged();
                     }
                 }, hour, minute, true);//Yes 24 hour time
                 mTimePicker.setTitle("Select Time");
@@ -113,7 +113,7 @@ public class TaskCreationActivity extends AppCompatActivity{
                 newl.setTag("New Loc");
                 newTask.addLocation(newl);
 
-                placeListAdapter.add(newl);
+                placeListAdapter.notifyDataSetChanged();
             }
         }
     }
