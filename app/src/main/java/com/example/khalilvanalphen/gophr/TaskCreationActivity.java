@@ -15,8 +15,10 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,13 +36,13 @@ public class TaskCreationActivity extends AppCompatActivity{
     ArrayList<Location> locations = new ArrayList<>();
     ArrayList<Time> times = new ArrayList<>();
 
+    Firebase firebase = new Firebase("https://gophr-c8962.firebaseio.com/");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_taskcreation);
-
-
+        setContentView(R.layout.activity_create);
 
         btnCreate = (Button) findViewById(R.id.tc_create);
         btnPickPlace = (Button) findViewById(R.id.tc_pick_place);
@@ -82,6 +84,9 @@ public class TaskCreationActivity extends AppCompatActivity{
 
                 newTask.setTitle(nameField.getText().toString());
                 newTask.setDescription(descField.getText().toString());
+                Toast.makeText(TaskCreationActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_LONG).show();
+                newTask.setOwner(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("task", newTask);

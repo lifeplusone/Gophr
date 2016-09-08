@@ -14,23 +14,23 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class BrowseActivity extends AppCompatActivity {
-
     Button btnDebug;
-    ListView listView;
+    ListView listView, listViewExtra;
 
-
+    GphTaskAdapter adapter, adapterExtra;
 
     Firebase mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_browse);
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://gophr-c8962.firebaseio.com/");
     }
@@ -50,8 +50,12 @@ public class BrowseActivity extends AppCompatActivity {
         ArrayList<GphTask> data = new ArrayList<GphTask>();
 
         listView = (ListView) findViewById(R.id.list_view);
-        final GphTaskAdapter adapter = new GphTaskAdapter(this, R.layout.task_list_row_item, data);
+        adapter = new GphTaskAdapter(this, R.layout.task_list_row_item, data);
         listView.setAdapter(adapter);
+
+        listViewExtra = (ListView) findViewById(R.id.list_view2);
+        adapterExtra = new GphTaskAdapter(this, R.layout.task_list_row_item, data);
+        listViewExtra.setAdapter(adapterExtra);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,11 +70,7 @@ public class BrowseActivity extends AppCompatActivity {
         mRef.addChildEventListener(new ChildEventListener() {
                     @Override
                     public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        Iterator<DataSnapshot> id = dataSnapshot.getChildren().iterator();
-                        while (id.hasNext()){
-                            System.out.println("item added");
-                            adapter.add(id.next().getValue(GphTask.class));
-                        }
+                        updateList(dataSnapshot);
                     }
 
                     @Override
@@ -80,10 +80,7 @@ public class BrowseActivity extends AppCompatActivity {
 
                     @Override
                     public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        Iterator<DataSnapshot> id = dataSnapshot.getChildren().iterator();
-                        while (id.hasNext()){
-                            adapter.add(id.next().getValue(GphTask.class));
-                        }
+                        updateList(dataSnapshot);
                     }
 
                     @Override
@@ -114,4 +111,17 @@ public class BrowseActivity extends AppCompatActivity {
             }
         }
     }
+    public void updateList(DataSnapshot data){
+        Iterator<DataSnapshot> id = data.getChildren().iterator();
+        while (id.hasNext()){
+            GphTask task = id.next().getValue(GphTask.class);
+            if (task.getOwner().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                adapter.add(task);
+            }else{
+                adapterExtra.add(task);
+            }
+        }
+    }
+
+
 }
