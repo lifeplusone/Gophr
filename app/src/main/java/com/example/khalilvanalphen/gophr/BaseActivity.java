@@ -19,11 +19,11 @@ import android.view.View;
  */
 public class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    FloatingActionButton fab = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -33,7 +33,7 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,8 +71,11 @@ public class BaseActivity extends AppCompatActivity implements NavigationView.On
 
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.nav_browse) {
+        if (id == R.id.nav_browse && !(this instanceof BrowseActivity)){
             Intent i = new Intent(this, BrowseActivity.class);
+            startActivity(i);
+        } else if (id == R.id.nav_create && !(this instanceof TaskCreationActivity)){
+            Intent i = new Intent(this, TaskCreationActivity.class);
             startActivity(i);
         }
 

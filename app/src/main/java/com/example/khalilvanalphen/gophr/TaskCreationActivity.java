@@ -6,7 +6,6 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class TaskCreationActivity extends AppCompatActivity{
+public class TaskCreationActivity extends BaseActivity{
 
     final GphTask newTask = new GphTask();
 
@@ -131,6 +130,10 @@ public class TaskCreationActivity extends AppCompatActivity{
         });
 
 
+    }
+    @Override
+    public void onStart(){
+        super.onStart();
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
