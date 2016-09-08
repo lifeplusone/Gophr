@@ -26,11 +26,6 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DEBUG"
-            android:id="@+id/btn_debug"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:text="New Task"
             android:id="@+id/btn_create"/>
         <ListView
