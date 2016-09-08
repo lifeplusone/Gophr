@@ -24,7 +24,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ItemViewActivity" />
-        <activity android:name=".BrowseActivity" />
         <activity
             android:name=".TaskCreationActivity"
             android:label="@string/title_activity_registration"
@@ -35,9 +34,9 @@
             android:value="AIzaSyBlzjRWMF_mpLY9d5JEC5eM9Y2i-AVJlpM" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".BrowseActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
