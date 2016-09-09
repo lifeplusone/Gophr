@@ -1,8 +1,11 @@
 package com.example.khalilvanalphen.gophr;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -28,9 +31,13 @@ public class BrowseActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_browse);
+        setContentView(R.layout.activity_base);
         Firebase.setAndroidContext(this);
         mRef = new Firebase("https://gophr-c8962.firebaseio.com/");
+
+        DrawerLayout outer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        outer.addView(layoutInflater.inflate(R.layout.content_browse, null), 0);
 
     }
 

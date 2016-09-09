@@ -3,9 +3,12 @@ package com.example.khalilvanalphen.gophr;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,7 +44,11 @@ public class TaskCreationActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create);
+        setContentView(R.layout.activity_base);
+
+        DrawerLayout outer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        outer.addView(layoutInflater.inflate(R.layout.content_create, null), 0);
 
         btnCreate = (Button) findViewById(R.id.tc_create);
         btnPickPlace = (Button) findViewById(R.id.tc_pick_place);
