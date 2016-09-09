@@ -92,7 +92,7 @@ public class TaskCreationActivity extends BaseActivity{
                 newTask.setDescription(descField.getText().toString());
                 Toast.makeText(TaskCreationActivity.this, FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_LONG).show();
                 newTask.setOwner(FirebaseAuth.getInstance().getCurrentUser().getUid());
-
+                newTask.setSpawnTime(System.currentTimeMillis());
 
                 Intent resultIntent = new Intent();
                 resultIntent.putExtra("task", newTask);

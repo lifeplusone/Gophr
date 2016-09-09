@@ -21,6 +21,8 @@ public class GphTask implements Parcelable{
     private String description;
     private ArrayList<Location> locations = new ArrayList<>();
     private ArrayList<Time> times = new ArrayList<>();
+    private long spawnTime;
+
 
     public void setTitle(String title) {
         this.title = title;
@@ -71,6 +73,7 @@ public class GphTask implements Parcelable{
         parcel.writeSerializable(times);
         parcel.writeSerializable(locations);
         parcel.writeString(owner);
+        parcel.writeLong(spawnTime);
     }
 
     // this is used to regenerate your object. All Parcelables must have a CREATOR that implements these two methods
@@ -90,6 +93,7 @@ public class GphTask implements Parcelable{
         times = (ArrayList<Time>) in.readSerializable();
         locations = (ArrayList<Location>) in.readSerializable();
         owner = in.readString();
+        spawnTime = in.readLong();
     }
 
     public void setOwner(String owner) {
@@ -99,4 +103,8 @@ public class GphTask implements Parcelable{
     public String getOwner(){
         return owner;
     }
+
+    public long getSpawnTime(){ return spawnTime; }
+    public void setSpawnTime(long spawnTime){this.spawnTime = spawnTime;}
+
 }
