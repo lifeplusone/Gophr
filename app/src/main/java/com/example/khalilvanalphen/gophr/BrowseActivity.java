@@ -39,13 +39,7 @@ public class BrowseActivity extends BaseActivity{
         LayoutInflater layoutInflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         outer.addView(layoutInflater.inflate(R.layout.content_browse, null), 0);
 
-    }
-
-    @Override
-    public void onStart(){
-        super.onStart();
         btnCreate = (Button) findViewById(R.id.btn_create);
-
         btnCreate.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), TaskCreationActivity.class);
@@ -72,33 +66,41 @@ public class BrowseActivity extends BaseActivity{
             }
         });
 
+        listViewExtra.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getApplicationContext(), ItemViewActivity.class);
+                i.putExtra("task", (GphTask) listViewExtra.getItemAtPosition(position));
+                startActivity(i);
+            }
+        });
+
 
         mRef.addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                        updateList(dataSnapshot);
-                    }
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                updateList(dataSnapshot);
+            }
 
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-                    }
+            }
 
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-                        updateList(dataSnapshot);
-                    }
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                updateList(dataSnapshot);
+            }
 
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
-                    }
+            }
 
-                    @Override
-                    public void onCancelled(FirebaseError firebaseError) {
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
 
-                    }
-                });
+            }
+        });
 
 
     }

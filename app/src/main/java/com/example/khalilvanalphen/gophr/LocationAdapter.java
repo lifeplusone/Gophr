@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class PlaceAdapter extends ArrayAdapter<Location> {
+public class LocationAdapter extends ArrayAdapter<Location> {
 
     Context context;
     int layoutResourceId;
     ArrayList<Location> data;
 
-    public PlaceAdapter(Context context, int layoutResourceId, ArrayList<Location> data) {
+    public LocationAdapter(Context context, int layoutResourceId, ArrayList<Location> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -28,13 +28,9 @@ public class PlaceAdapter extends ArrayAdapter<Location> {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         View row = convertView;
         Holder holder = null;
-
-
-
-
 
         if(row == null)
         {
@@ -45,6 +41,25 @@ public class PlaceAdapter extends ArrayAdapter<Location> {
             holder.imgIcon = (ImageView)row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView)row.findViewById(R.id.txtTitle);
             holder.tagLine = (EditText) row.findViewById(R.id.tagline);
+
+            holder.tagLine.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    data.get(position).setTag(charSequence.toString());
+                    System.out.println(position);
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
 
             row.setTag(holder);
         }
@@ -58,22 +73,7 @@ public class PlaceAdapter extends ArrayAdapter<Location> {
             holder.txtTitle.setText(location.getName());
         }
 
-        holder.tagLine.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                data.get(position).setTag(editable.toString());
-            }
-        });
 
         return row;
     }
@@ -81,5 +81,7 @@ public class PlaceAdapter extends ArrayAdapter<Location> {
         ImageView imgIcon;
         TextView txtTitle;
         EditText tagLine;
+
+
     }
 }

@@ -16,8 +16,7 @@
         android:theme="@style/AppTheme">
         android:name="Gophr"
         <activity
-            android:name=".LoginActivity"
-            android:label="Login">
+            android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -34,7 +33,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBlzjRWMF_mpLY9d5JEC5eM9Y2i-AVJlpM" />
+            android:value="A  IzaSyBlzjRWMF_mpLY9d5JEC5eM9Y2i-AVJlpM" />
 
         <activity
             android:name=".BrowseActivity"

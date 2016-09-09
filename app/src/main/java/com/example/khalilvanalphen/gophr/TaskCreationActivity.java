@@ -60,7 +60,7 @@ public class TaskCreationActivity extends BaseActivity{
 
         timeListAdapter = new TimeAdapter(this, R.layout.time_list_row, times);
         timeList.setAdapter(timeListAdapter);
-        placeListAdapter = new PlaceAdapter(this, R.layout.location_list_row, locations);
+        placeListAdapter = new LocationAdapter(this, R.layout.location_list_row, locations);
         placeList.setAdapter(placeListAdapter);
 
         nameField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -149,12 +149,12 @@ public class TaskCreationActivity extends BaseActivity{
 
                 Place place = PlacePicker.getPlace(TaskCreationActivity.this, data);
 
-                Location newl = new Location();
-                newl.setLat(place.getLatLng().latitude);
-                newl.setLng(place.getLatLng().longitude);
-                newl.setName(place.getName().toString());
-                newl.setId(place.getId());
-                locations.add(newl);
+                Location newL = new Location();
+                newL.setLat(place.getLatLng().latitude);
+                newL.setLng(place.getLatLng().longitude);
+                newL.setName(place.getName().toString());
+                newL.setId(place.getId());
+                locations.add(newL);
 
                 placeListAdapter.notifyDataSetChanged();
             }
