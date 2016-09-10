@@ -14,8 +14,6 @@ public class GphTask implements Parcelable{
      * GOPHR TASKS
      */
 
-
-
     private String owner;
     private String title;
     private String description;
